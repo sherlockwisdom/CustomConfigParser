@@ -13,14 +13,17 @@ import configparser
 class CustomConfigParser:
     class NoDefaultFile(Exception):
         def __init__(self, default_env_file):
+            self.filename=default_env_file
             super().__init__(f'Failed to read file: {default_env_file}')
 
     class ConfigFileNotFound(Exception):
         def __init__(self, path_cfg_file):
+            self.filename=path_cfg_file
             super().__init__(f'Failed to read file: {path_cfg_file}')
 
     class ConfigFileNotInList(Exception):
         def __init__(self, path_cfg_file):
+            self.filename=path_cfg_file
             super().__init__(f'File not in list of config files: {path_cfg_file}')
 
     @classmethod
