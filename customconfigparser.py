@@ -46,11 +46,17 @@ class CustomConfigParser:
         cfg_files=[]
         if cfg_file is not None and cfg_file not in cls.cfg_files:
             raise cls.ConfigFileNotInList(cfg_file)
+
         elif cfg_file is not None:
             path_cfg_file = os.path.abspath(cls.default_env_dir) + "/" + cfg_file
+
+            if len(configparser.ConfigParser().read(path_cfg_file)) < 1:
+                raise cls.ConfigFileNotFound(path_cfg_file)
+
             configreader=configparser.ConfigParser()
             configreader.read(path_cfg_file)
             return configreader
+
         else:
             read_object={}
             for path_cfg_file in cls.cfg_files:
