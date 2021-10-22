@@ -45,7 +45,7 @@ class CustomConfigParser:
         ''' files should be relative to the .custom_config_parser.txt '''
         cfg_files=[]
         if cfg_file is not None and cfg_file not in cls.cfg_files:
-            raise ConfigFileNotInList(cfg_file)
+            raise cls.ConfigFileNotInList(cfg_file)
         elif cfg_file is not None:
             path_cfg_file = os.path.abspath(cls.default_env_dir) + "/" + cfg_file
             configreader=configparser.ConfigParser()
@@ -77,8 +77,15 @@ if __name__ == "__main__":
     try:
         # CustomConfigParser('/home/sherlock/test_dir')
         config=CustomConfigParser()
-        config=config.read()
-        print(config)
+        config1=config.read()
+        print(config1)
+
+        config2=config.read("example.config.ini")
+        print(config2)
+
+        config3=config.read("noexist.example.config.ini")
+        print(config3)
+
     except CustomConfigParser.NoDefaultFile as error:
         print(traceback.format_exc())
     except CustomConfigParser.ConfigFileNotFound as error:
