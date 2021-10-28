@@ -43,7 +43,7 @@ class CustomConfigParser:
             raise cls.NoDefaultFile(full_path_default_env_file)
 
         cls.cfg_files=[]
-        with open(cls.default_env_file, 'r') as fd_default_env_file:
+        with open(full_path_default_env_file, 'r') as fd_default_env_file:
             cls.cfg_files = fd_default_env_file.read().split('\n')
         
     @classmethod
