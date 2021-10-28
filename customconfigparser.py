@@ -24,7 +24,7 @@ class CustomConfigParser:
             super().__init__(f'File not in list of config files: {path_cfg_file}')
 
     @classmethod
-    def __init__(cls, default_env_dir="."):
+    def __init__(cls, default_env_dir=os.getcwd()): # default_env_dir is the current CustomConfigParser dir
         ''' Using a precise env file format to know of the configs to be read '''
         cls.default_env_file='.ccp.txt'
         cls.default_env_dir = default_env_dir
@@ -33,6 +33,9 @@ class CustomConfigParser:
         if not through an exception
         '''
         full_path_default_env_file = os.path.abspath(default_env_dir) + "/" + cls.default_env_file
+        # print(full_path_default_env_file)
+        # full_path_default_env_file = os.path.join(os.path.dirname(__file__), '..', cls.default_env_file)
+        # print(full_path_default_env_file)
         if not os.path.isfile(full_path_default_env_file):
             raise cls.NoDefaultFile(full_path_default_env_file)
 
